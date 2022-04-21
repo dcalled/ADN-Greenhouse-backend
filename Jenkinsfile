@@ -10,6 +10,7 @@ pipeline {
     stage('Checkout') {
       steps{
         echo "------------>Checkout<------------"
+        sh 'ls'
         sh 'pwd'
         sh 'cd java-arquitectura-hexagonal/microservicio' 
         sh 'pwd'
