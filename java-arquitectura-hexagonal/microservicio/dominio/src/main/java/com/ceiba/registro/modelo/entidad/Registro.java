@@ -13,11 +13,10 @@ import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 @Getter
 public class Registro {
 
-    private static final String SE_DEBE_INGRESAR_EL_NOMBRE_DE_USUARIO = "Se debe ingresar el nombre de usuario";
+    private static final String ATRIBUTO_OBLIGATORIO = "Se debe ingresar el atributo";
 
 
-    private static final int MINIMO_DE_DIAS_GERMINACION = 3;
-    private static final int MAXIMO_DE_DIAS_GERMINACION = 6;
+    private static final int DIAS_GERMINACION = 4;
     private static final double PORCENTAJE_TIEMPO_DE_PLANTULA = 0.2;
 
     private Long id;
@@ -31,7 +30,10 @@ public class Registro {
     private LocalDate fechaReproduccion;
 
     public Registro(Long id, String nombre, Double valorBase, Integer tiempoVegetacion, LocalDate fechaGerminacion) {
-        validarObligatorio(nombre, SE_DEBE_INGRESAR_EL_NOMBRE_DE_USUARIO);;
+        validarObligatorio(nombre, ATRIBUTO_OBLIGATORIO);
+        validarObligatorio(valorBase, ATRIBUTO_OBLIGATORIO);
+        validarObligatorio(tiempoVegetacion, ATRIBUTO_OBLIGATORIO);
+        validarObligatorio(fechaGerminacion, ATRIBUTO_OBLIGATORIO);
 
         this.id = id;
         this.nombre = nombre;
@@ -45,11 +47,7 @@ public class Registro {
     }
 
     private void calcularFechaPlantula() {
-        int tiempoGerminacion = new Random()
-                .ints(MINIMO_DE_DIAS_GERMINACION, MAXIMO_DE_DIAS_GERMINACION + 1)
-                .findFirst()
-                .getAsInt();
-        fechaPlantula = fechaGerminacion.plusDays(tiempoGerminacion);
+        fechaPlantula = fechaGerminacion.plusDays(DIAS_GERMINACION);
     }
 
     private void calcularFechaMacollamiento() {

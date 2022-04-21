@@ -47,24 +47,38 @@ public class Venta {
         );
     }
 
+    public Venta(Long id, String nombre, LocalDate fechaIngreso, Double valorBase,
+                 LocalDate fechaGerminacion, LocalDate fechaPlantula,
+                 LocalDate fechaMacollamiento, LocalDate fechaReproduccion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaVenta = LocalDate.now();
+        calcularPrecioYFase(valorBase,fechaGerminacion, fechaPlantula, fechaMacollamiento, fechaReproduccion);
+    }
+
     private void calcularPrecioYFase(Double valorBase, LocalDate fechaGerminacion, LocalDate fechaPlantula,
                                 LocalDate fechaMacollamiento, LocalDate fechaReproduccion) {
 
-        double aumentoPrecio = 0.;
-        if(fechaVenta.isAfter(fechaReproduccion))
-            throw new ExcepcionValorInvalido("No se puede vender plantas en fase reproductiva.");
-        else if(fechaVenta.isAfter(fechaMacollamiento)) {
-            aumentoPrecio = AUMENTO_PRECIO_EN_MACOLLAMIENTO;
-            fase = FASE_MACOLLAMIENTO;
-        } else if(fechaVenta.isAfter(fechaPlantula)) {
-            aumentoPrecio = AUMENTO_PRECIO_EN_PLANTULA;
-            fase = FASE_PLANTULA;
-        } else if(fechaVenta.isAfter(fechaGerminacion)) {
-            aumentoPrecio = AUMENTO_PRECIO_EN_GERMINACION;
-            fase = FASE_GERMINACION;
-        } else throw new ExcepcionValorInvalido("No se venden semillas.");
+        try {
+            double aumentoPrecio = 0.;
+            if (fechaVenta.isAfter(fechaReproduccion))
+                throw new ExcepcionValorInvalido("No se puede vender plantas en fase reproductiva.");
+            else if (fechaVenta.isAfter(fechaMacollamiento)) {
+                aumentoPrecio = AUMENTO_PRECIO_EN_MACOLLAMIENTO;
+                fase = FASE_MACOLLAMIENTO;
+            } else if (fechaVenta.isAfter(fechaPlantula)) {
+                aumentoPrecio = AUMENTO_PRECIO_EN_PLANTULA;
+                fase = FASE_PLANTULA;
+            } else if (fechaVenta.isAfter(fechaGerminacion)) {
+                aumentoPrecio = AUMENTO_PRECIO_EN_GERMINACION;
+                fase = FASE_GERMINACION;
+            } else throw new ExcepcionValorInvalido("No se venden semillas.");
 
-        precio = valorBase * aumentoPrecio;
+            precio = valorBase * aumentoPrecio;
+        } catch (Exception e) {
+            throw new ExcepcionValorInvalido("Valor invalido");
+        }
 
     }
 
