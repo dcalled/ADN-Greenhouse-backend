@@ -1,0 +1,21 @@
+jasypt:
+   encryptor:
+      password: y
+      algorithm: PBEWithMD5AndDES
+
+server:
+   port: 8081
+   servlet:
+      context-path: /inventario
+      session:
+         timeout: 21600s
+
+spring:
+   datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+      jdbcUrl: jdbc:mysql://172.18.0.3:3306/greenhouseDB
+      username: root
+      password: ENC(LOetHx9IAvuZScoQBQuYLQO/F0XzvpVM)
+      hikari:
+         poolName: pool

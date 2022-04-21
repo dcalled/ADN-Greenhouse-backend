@@ -1,0 +1,1 @@
+insert into venta (nombre, precio, fase, fecha_ingreso, fecha_venta) values (:nombre, :precio, :fase, :fechaIngreso, :fechaVenta)
