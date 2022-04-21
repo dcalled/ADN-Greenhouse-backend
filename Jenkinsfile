@@ -12,7 +12,6 @@ pipeline {
         echo "------------>Checkout<------------"
         sh 'ls'
         sh 'pwd'
-        sh 'cd java-arquitectura-hexagonal/microservicio & pwd' 
         sh 'pwd'
       }
     }
@@ -20,7 +19,11 @@ pipeline {
     stage('Compile & Unit Tests') {
       steps{
         echo "------------>Compile & Unit Tests<------------"
-        sh 'pwd'
+        
+        sh 'cd java-arquitectura-hexagonal/microservicio' 
+        sh 'chmod +x gradlew'
+        sh './gradlew --b ./build.gradle test'
+        
       }
     }
 
