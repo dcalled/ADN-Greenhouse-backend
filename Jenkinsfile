@@ -12,6 +12,7 @@ pipeline {
         echo "------------>Checkout<------------"
         sh 'pwd'
         sh 'cd java-arquitectura-hexagonal/microservicio' 
+        sh 'pwd'
       }
     }
     
