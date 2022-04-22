@@ -1,8 +1,5 @@
 package com.ceiba.venta.servicio;
 
-import com.ceiba.registro.modelo.dto.DtoRegistro;
-import com.ceiba.registro.modelo.entidad.Registro;
-import com.ceiba.registro.puerto.dao.DaoRegistro;
 import com.ceiba.venta.modelo.entidad.Venta;
 import com.ceiba.venta.puerto.repositorio.RepositorioVenta;
 

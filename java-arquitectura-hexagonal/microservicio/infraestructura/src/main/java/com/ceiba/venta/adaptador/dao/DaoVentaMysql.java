@@ -2,8 +2,6 @@ package com.ceiba.venta.adaptador.dao;
 
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
-import com.ceiba.registro.modelo.dto.DtoRegistro;
-import com.ceiba.registro.puerto.dao.DaoRegistro;
 import com.ceiba.venta.modelo.dto.DtoVenta;
 import com.ceiba.venta.puerto.dao.DaoVenta;
 import org.springframework.stereotype.Component;

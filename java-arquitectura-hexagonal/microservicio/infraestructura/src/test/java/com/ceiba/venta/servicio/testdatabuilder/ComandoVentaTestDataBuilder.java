@@ -1,10 +1,6 @@
 package com.ceiba.venta.servicio.testdatabuilder;
 
-import com.ceiba.registro.comando.ComandoRegistro;
 import com.ceiba.venta.comando.ComandoVenta;
-
-import java.time.LocalDate;
-import java.util.UUID;
 
 public class ComandoVentaTestDataBuilder {
 

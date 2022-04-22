@@ -4,9 +4,6 @@ import com.ceiba.registro.modelo.dto.DtoRegistro;
 import com.ceiba.registro.puerto.dao.DaoRegistro;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Optional;
-
 @Component
 public class ManejadorObtenerRegistro {
 

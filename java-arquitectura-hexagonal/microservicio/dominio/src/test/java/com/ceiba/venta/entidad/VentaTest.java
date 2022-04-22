@@ -3,8 +3,6 @@ package com.ceiba.venta.entidad;
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
-import com.ceiba.registro.modelo.entidad.Registro;
-import com.ceiba.registro.servicio.testdatabuilder.RegistroTestDataBuilder;
 import com.ceiba.venta.modelo.entidad.Venta;
 import com.ceiba.venta.servicio.testdatabuilder.VentaTestDataBuilder;
 import org.junit.jupiter.api.DisplayName;

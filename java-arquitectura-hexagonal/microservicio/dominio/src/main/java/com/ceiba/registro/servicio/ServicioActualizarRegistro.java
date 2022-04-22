@@ -1,6 +1,5 @@
 package com.ceiba.registro.servicio;
 
-import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.registro.modelo.entidad.Registro;
 import com.ceiba.registro.puerto.repositorio.RepositorioRegistro;
 

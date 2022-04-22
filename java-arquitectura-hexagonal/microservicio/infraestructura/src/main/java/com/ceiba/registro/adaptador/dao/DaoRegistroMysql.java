@@ -6,7 +6,10 @@ import com.ceiba.registro.modelo.dto.DtoRegistro;
 import com.ceiba.registro.puerto.dao.DaoRegistro;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @Component
 public class DaoRegistroMysql implements DaoRegistro {

@@ -3,7 +3,6 @@ package com.ceiba.registro.puerto.dao;
 import com.ceiba.registro.modelo.dto.DtoRegistro;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface DaoRegistro {
 

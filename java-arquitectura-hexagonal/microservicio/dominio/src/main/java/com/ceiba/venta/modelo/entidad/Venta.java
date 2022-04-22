@@ -3,11 +3,9 @@ package com.ceiba.venta.modelo.entidad;
 
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.registro.modelo.dto.DtoRegistro;
-import com.ceiba.registro.modelo.entidad.Registro;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 
