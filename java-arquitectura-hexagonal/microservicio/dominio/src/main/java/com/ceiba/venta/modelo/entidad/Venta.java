@@ -64,7 +64,7 @@ public class Venta {
     private void calcularPrecioYFase(Double valorBase, LocalDate fechaGerminacion, LocalDate fechaPlantula,
                                 LocalDate fechaMacollamiento, LocalDate fechaReproduccion) {
 
-            double aumentoPrecio = 0.;
+            double aumentoPrecio;
             if (fechaVenta.isAfter(fechaReproduccion)) {
                 throw new ExcepcionValorInvalido("No se puede vender plantas en fase reproductiva.");
             } else if (fechaVenta.isAfter(fechaMacollamiento)) {

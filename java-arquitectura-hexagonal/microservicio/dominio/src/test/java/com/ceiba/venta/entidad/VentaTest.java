@@ -3,6 +3,7 @@ package com.ceiba.venta.entidad;
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
+import com.ceiba.registro.modelo.dto.DtoRegistro;
 import com.ceiba.venta.modelo.entidad.Venta;
 import com.ceiba.venta.servicio.testdatabuilder.VentaTestDataBuilder;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class VentaTest {
 
@@ -115,7 +117,7 @@ public class VentaTest {
 
     @Test
     void deberiaFallarVentaEnFaseReproduccion() {
-
+        // arrange
         LocalDate fechaGerminacion = LocalDate.now().minusDays(15);
         LocalDate fechaPlantula = LocalDate.now().minusDays(10);
         LocalDate fechaMacollamiento = LocalDate.now().minusDays(5);
@@ -134,5 +136,21 @@ public class VentaTest {
                 ExcepcionValorInvalido.class, "No se puede vender plantas en fase reproductiva.");
     }
 
+    @Test
+    void deberiaCrearConDtoRegistro() {
+        // arrange
+        LocalDate fechaGerminacion = LocalDate.now().minusDays(10);
+        LocalDate fechaPlantula = LocalDate.now().minusDays(5);
+        LocalDate fechaMacollamiento = LocalDate.now().minusDays(2);
+        LocalDate fechaReproduccion = LocalDate.now().plusDays(10);
+        //act
+        Venta venta = new Venta(new DtoRegistro(
+                1L,"1234", 100., 100,
+                LocalDate.now(), fechaGerminacion,
+                fechaPlantula, fechaMacollamiento, fechaReproduccion));
+        //assert
+        assertEquals("1234", venta.getNombre());
+        assertNull(venta.getId());
+    }
 
 }
