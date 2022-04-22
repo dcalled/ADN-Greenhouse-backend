@@ -44,6 +44,17 @@ class ComandoControladorVentaTest {
                 .andExpect(content().json("{'valor': 2}"));
     }
 
+    @Test
+    void deberiaFallarPorRegistroInexistente() throws Exception{
+        // arrange
+        ComandoVenta venta = new ComandoVentaTestDataBuilder().conId(10L).build();
+        // act - assert
+        mocMvc.perform(post("/ventas")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(venta)))
+                .andExpect(status().isInternalServerError());
+    }
+
 
 
 }
