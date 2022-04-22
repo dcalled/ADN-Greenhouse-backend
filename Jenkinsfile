@@ -29,9 +29,9 @@ pipeline {
     stage('Static Code Analysis') {
       steps{
         echo '------------>Análisis de código estático<------------'
-        //withSonarQubeEnv('Sonar') {
-          //sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
-        //}
+        withSonarQubeEnv('Sonar') {
+          sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+        }
         sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:greenhouse.david.calle',
           sonarName:'CeibaADN-Greenhouse(david.calle)',
           sonarPathProperties:'./sonar-project.properties')
