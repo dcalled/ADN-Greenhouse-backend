@@ -2,6 +2,7 @@ package com.ceiba.venta.servicio;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
+import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.venta.modelo.entidad.Venta;
 import com.ceiba.venta.puerto.repositorio.RepositorioVenta;
 import com.ceiba.venta.servicio.testdatabuilder.VentaTestDataBuilder;
@@ -21,7 +22,7 @@ public class ServicioCrearVentaTest {
         // arrange
         VentaTestDataBuilder registroTestDataBuilder = new VentaTestDataBuilder().conFechaGerminacion(null);
         // act - assert
-        BasePrueba.assertThrows(registroTestDataBuilder::build, ExcepcionValorInvalido.class, "Valor invalido");
+        BasePrueba.assertThrows(registroTestDataBuilder::build, ExcepcionValorObligatorio.class, "Se debe ingresar el atributo");
     }
 
 
