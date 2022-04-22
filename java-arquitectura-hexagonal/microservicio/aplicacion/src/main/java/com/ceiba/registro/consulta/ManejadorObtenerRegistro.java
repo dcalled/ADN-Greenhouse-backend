@@ -16,5 +16,5 @@ public class ManejadorObtenerRegistro {
         this.daoRegistro = daoRegistro;
     }
 
-    public DtoRegistro ejecutar(Long id){ return this.daoRegistro.obtener(id).get(); }
+    public DtoRegistro ejecutar(Long id){ return this.daoRegistro.obtener(id); }
 }

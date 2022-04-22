@@ -24,7 +24,7 @@ public class ManejadorCrearVenta implements ManejadorComandoRespuesta<ComandoVen
     }
 
     public ComandoRespuesta<Long> ejecutar(ComandoVenta comandoVenta) {
-        DtoRegistro registro = daoRegistro.obtener(comandoVenta.getId()).get();
+        DtoRegistro registro = daoRegistro.obtener(comandoVenta.getId());
         Venta venta = fabricaVenta.crear(registro);
         return new ComandoRespuesta<>(this.servicioCrearVenta.ejecutar(venta));
     }

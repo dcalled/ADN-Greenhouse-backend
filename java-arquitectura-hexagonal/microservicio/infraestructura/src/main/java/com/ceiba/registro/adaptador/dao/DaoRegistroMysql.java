@@ -6,10 +6,7 @@ import com.ceiba.registro.modelo.dto.DtoRegistro;
 import com.ceiba.registro.puerto.dao.DaoRegistro;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class DaoRegistroMysql implements DaoRegistro {
@@ -32,14 +29,14 @@ public class DaoRegistroMysql implements DaoRegistro {
     }
 
     @Override
-    public Optional<DtoRegistro> obtener(Long id) {
+    public DtoRegistro obtener(Long id) {
         Map<String, Long> parametro = new HashMap<>();
         parametro.put("id", id);
-        try {
-            DtoRegistro registro = this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtener, parametro, new MapeoRegistro());
-            return Optional.ofNullable(registro);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+
+        DtoRegistro registro = this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtener, parametro, new MapeoRegistro());
+        if(registro == null)
+            throw new NoSuchElementException("Registro no encontrado");
+        return registro;
+
     }
 }

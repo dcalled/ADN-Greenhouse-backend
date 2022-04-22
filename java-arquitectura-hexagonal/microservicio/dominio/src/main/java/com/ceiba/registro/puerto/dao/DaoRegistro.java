@@ -18,5 +18,5 @@ public interface DaoRegistro {
      * @param id
      * @return los usuarios
      */
-    Optional<DtoRegistro> obtener(Long id);
+    DtoRegistro obtener(Long id);
 }
