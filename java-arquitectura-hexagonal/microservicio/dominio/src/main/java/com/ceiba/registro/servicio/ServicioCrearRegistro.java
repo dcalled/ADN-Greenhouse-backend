@@ -5,9 +5,7 @@ import com.ceiba.registro.puerto.repositorio.RepositorioRegistro;
 
 
 public class ServicioCrearRegistro {
-
-    private static final String EL_USUARIO_YA_EXISTE_EN_EL_SISTEMA = "El usuario ya existe en el sistema";
-
+    
     private final RepositorioRegistro repositorioRegistro;
 
     public ServicioCrearRegistro(RepositorioRegistro repositorioRegistro) {
