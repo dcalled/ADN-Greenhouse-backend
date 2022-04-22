@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RegistroTest {
 
     @Test
-    @DisplayName("Deberia crear correctamente el usuario")
+    @DisplayName("Deberia crear correctamente el registro")
     void deberiaCrearCorrectamenteElRegistro() {
         // arrange
         LocalDate fechaGerminacion = LocalDate.now();

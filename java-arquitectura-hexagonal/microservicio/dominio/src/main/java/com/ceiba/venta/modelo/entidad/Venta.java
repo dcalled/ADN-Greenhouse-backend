@@ -14,7 +14,7 @@ import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 @Getter
 public class Venta {
 
-    private static final String SE_DEBE_INGRESAR_EL_NOMBRE_DE_USUARIO = "Se debe ingresar el nombre de usuario";
+    private static final String ATRIBUTO_OBLIGATORIO = "Se debe ingresar el atributo";
 
     private static final Double AUMENTO_PRECIO_EN_MACOLLAMIENTO = 2.;
     private static final Double AUMENTO_PRECIO_EN_PLANTULA = 1.55;
@@ -34,22 +34,28 @@ public class Venta {
 
 
     public Venta(DtoRegistro registro) {
-
-        this.nombre = registro.getNombre();
-        this.fechaIngreso = registro.getFechaIngreso();
-        this.fechaVenta = LocalDate.now();
-        calcularPrecioYFase(
+        this(null,
+                registro.getNombre(),
+                registro.getFechaIngreso(),
                 registro.getValorBase(),
                 registro.getFechaGerminacion(),
                 registro.getFechaPlantula(),
                 registro.getFechaMacollamiento(),
                 registro.getFechaReproduccion()
         );
+
     }
 
     public Venta(Long id, String nombre, LocalDate fechaIngreso, Double valorBase,
                  LocalDate fechaGerminacion, LocalDate fechaPlantula,
                  LocalDate fechaMacollamiento, LocalDate fechaReproduccion) {
+        validarObligatorio(nombre, ATRIBUTO_OBLIGATORIO);
+        validarObligatorio(fechaIngreso, ATRIBUTO_OBLIGATORIO);
+        validarObligatorio(valorBase, ATRIBUTO_OBLIGATORIO);
+        validarObligatorio(fechaGerminacion, ATRIBUTO_OBLIGATORIO);
+        validarObligatorio(fechaPlantula, ATRIBUTO_OBLIGATORIO);
+        validarObligatorio(fechaMacollamiento, ATRIBUTO_OBLIGATORIO);
+        validarObligatorio(fechaReproduccion, ATRIBUTO_OBLIGATORIO);
         this.id = id;
         this.nombre = nombre;
         this.fechaIngreso = fechaIngreso;
@@ -60,11 +66,10 @@ public class Venta {
     private void calcularPrecioYFase(Double valorBase, LocalDate fechaGerminacion, LocalDate fechaPlantula,
                                 LocalDate fechaMacollamiento, LocalDate fechaReproduccion) {
 
-        try {
             double aumentoPrecio = 0.;
-            if (fechaVenta.isAfter(fechaReproduccion))
+            if (fechaVenta.isAfter(fechaReproduccion)) {
                 throw new ExcepcionValorInvalido("No se puede vender plantas en fase reproductiva.");
-            else if (fechaVenta.isAfter(fechaMacollamiento)) {
+            } else if (fechaVenta.isAfter(fechaMacollamiento)) {
                 aumentoPrecio = AUMENTO_PRECIO_EN_MACOLLAMIENTO;
                 fase = FASE_MACOLLAMIENTO;
             } else if (fechaVenta.isAfter(fechaPlantula)) {
@@ -76,9 +81,6 @@ public class Venta {
             } else throw new ExcepcionValorInvalido("No se venden semillas.");
 
             precio = valorBase * aumentoPrecio;
-        } catch (Exception e) {
-            throw new ExcepcionValorInvalido("Valor invalido");
-        }
 
     }
 

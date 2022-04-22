@@ -1,9 +1,12 @@
 package com.ceiba.venta.entidad;
 
 import com.ceiba.BasePrueba;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.registro.modelo.entidad.Registro;
 import com.ceiba.registro.servicio.testdatabuilder.RegistroTestDataBuilder;
+import com.ceiba.venta.modelo.entidad.Venta;
+import com.ceiba.venta.servicio.testdatabuilder.VentaTestDataBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,79 +17,124 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VentaTest {
 
     @Test
-    @DisplayName("Deberia crear correctamente el usuario")
-    void deberiaCrearCorrectamenteElRegistro() {
+    @DisplayName("Deberia crear correctamente la venta")
+    void deberiaCrearCorrectamenteLaVenta() {
         // arrange
-        LocalDate fechaGerminacion = LocalDate.now();
+        LocalDate fechaGerminacion = LocalDate.now().minusDays(10);
+        LocalDate fechaPlantula = LocalDate.now().minusDays(2);
+        LocalDate fechaMacollamiento = LocalDate.now().plusDays(8);
+        LocalDate fechaReproduccion = LocalDate.now().plusDays(20);
         //act
-        Registro registro = new RegistroTestDataBuilder()
+        Venta venta = new VentaTestDataBuilder()
                 .conFechaGerminacion(fechaGerminacion)
+                .conFechaPlantula(fechaPlantula)
+                .conFechaMacollamiento(fechaMacollamiento)
+                .conFechaReproduccion(fechaReproduccion)
+                .conValorBase(100)
                 .conId(1L).build();
         //assert
-        assertEquals(1, registro.getId());
-        assertEquals("1234", registro.getNombre());
-        assertEquals(12.34, registro.getValorBase());
-        assertEquals(fechaGerminacion, registro.getFechaGerminacion());
+        assertEquals(1, venta.getId());
+        assertEquals("1234", venta.getNombre());
     }
 
     @Test
     void deberiaFallarSinNombre() {
 
         //Arrange
-        RegistroTestDataBuilder registroTestDataBuilder = new RegistroTestDataBuilder()
+        VentaTestDataBuilder ventaTestDataBuilder = new VentaTestDataBuilder()
                 .conNombre(null)
                 .conId(1L);
         //act-assert
         BasePrueba.assertThrows(() -> {
-                    registroTestDataBuilder.build();
+                    ventaTestDataBuilder.build();
                 },
                 ExcepcionValorObligatorio.class, "Se debe ingresar el atributo");
     }
 
 
     @Test
-    void deberiaCalcularFechaPlantulaCorrectamente() {
-        int tiempoVegetacion = 100;
-        LocalDate fechaGerminacion = LocalDate.of(2022, 3,20);
-        LocalDate fechaPlantula = LocalDate.of(2022, 3, 24);
-
-        Registro registro = new RegistroTestDataBuilder()
+    void deberiaCalcularFaseGerminacionCorrectamente() {
+        // arrange
+        LocalDate fechaGerminacion = LocalDate.now().minusDays(1);
+        LocalDate fechaPlantula = LocalDate.now().plusDays(2);
+        LocalDate fechaMacollamiento = LocalDate.now().plusDays(8);
+        LocalDate fechaReproduccion = LocalDate.now().plusDays(20);
+        //act
+        Venta venta = new VentaTestDataBuilder()
                 .conFechaGerminacion(fechaGerminacion)
-                .conTiempoVegetacion(tiempoVegetacion)
-                .build();
-
-        assertEquals(fechaPlantula, registro.getFechaPlantula());
+                .conFechaPlantula(fechaPlantula)
+                .conFechaMacollamiento(fechaMacollamiento)
+                .conFechaReproduccion(fechaReproduccion)
+                .conValorBase(100)
+                .conId(1L).build();
+        //assert
+        assertEquals("Germinacion", venta.getFase());
+        assertEquals(100*1.15, venta.getPrecio());
 
     }
 
     @Test
-    void deberiaCalcularFechaReproduccionCorrectamente() {
-        int tiempoVegetacion = 100;
-        LocalDate fechaGerminacion = LocalDate.of(2022, 3,20);
-        LocalDate fechaReproduccion = LocalDate.of(2022, 7, 2);
-
-        Registro registro = new RegistroTestDataBuilder()
+    void deberiaCalcularFasePlantulaCorrectamente() {
+        // arrange
+        LocalDate fechaGerminacion = LocalDate.now().minusDays(10);
+        LocalDate fechaPlantula = LocalDate.now().minusDays(2);
+        LocalDate fechaMacollamiento = LocalDate.now().plusDays(8);
+        LocalDate fechaReproduccion = LocalDate.now().plusDays(20);
+        //act
+        Venta venta = new VentaTestDataBuilder()
                 .conFechaGerminacion(fechaGerminacion)
-                .conTiempoVegetacion(tiempoVegetacion)
-                .build();
-
-        assertEquals(fechaReproduccion, registro.getFechaReproduccion());
+                .conFechaPlantula(fechaPlantula)
+                .conFechaMacollamiento(fechaMacollamiento)
+                .conFechaReproduccion(fechaReproduccion)
+                .conValorBase(100)
+                .conId(1L).build();
+        //assert
+        assertEquals("Plantula", venta.getFase());
+        assertEquals(100*1.55, venta.getPrecio());
 
     }
-
 
     @Test
-    void deberiaCalcularFechaMacollamientoCorrectamente() {
-        int tiempoVegetacion = 100;
-        LocalDate fechaGerminacion = LocalDate.of(2022, 3,20);
-        LocalDate fechaMacollamiento = LocalDate.of(2022, 4, 13);
-
-        Registro registro = new RegistroTestDataBuilder()
+    void deberiaCalcularFaseMacollamientoCorrectamente() {
+        // arrange
+        LocalDate fechaGerminacion = LocalDate.now().minusDays(10);
+        LocalDate fechaPlantula = LocalDate.now().minusDays(5);
+        LocalDate fechaMacollamiento = LocalDate.now().minusDays(2);
+        LocalDate fechaReproduccion = LocalDate.now().plusDays(10);
+        //act
+        Venta venta = new VentaTestDataBuilder()
                 .conFechaGerminacion(fechaGerminacion)
-                .conTiempoVegetacion(tiempoVegetacion)
-                .build();
-
-        assertEquals(fechaMacollamiento, registro.getFechaMacollamiento());
+                .conFechaPlantula(fechaPlantula)
+                .conFechaMacollamiento(fechaMacollamiento)
+                .conFechaReproduccion(fechaReproduccion)
+                .conValorBase(100)
+                .conId(1L).build();
+        //assert
+        assertEquals("Macollamiento", venta.getFase());
+        assertEquals(100*2, venta.getPrecio());
 
     }
+
+    @Test
+    void deberiaFallarVentaEnFaseReproduccion() {
+
+        LocalDate fechaGerminacion = LocalDate.now().minusDays(15);
+        LocalDate fechaPlantula = LocalDate.now().minusDays(10);
+        LocalDate fechaMacollamiento = LocalDate.now().minusDays(5);
+        LocalDate fechaReproduccion = LocalDate.now().minusDays(2);
+        VentaTestDataBuilder ventaTestDataBuilder = new VentaTestDataBuilder()
+                .conFechaGerminacion(fechaGerminacion)
+                .conFechaPlantula(fechaPlantula)
+                .conFechaMacollamiento(fechaMacollamiento)
+                .conFechaReproduccion(fechaReproduccion)
+                .conValorBase(100)
+                .conId(1L);
+        //act-assert
+        BasePrueba.assertThrows(() -> {
+                    ventaTestDataBuilder.build();
+                },
+                ExcepcionValorInvalido.class, "No se puede vender plantas en fase reproductiva.");
+    }
+
+
 }

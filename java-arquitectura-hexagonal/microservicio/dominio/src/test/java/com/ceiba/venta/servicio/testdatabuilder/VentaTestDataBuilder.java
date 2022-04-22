@@ -9,7 +9,6 @@ public class VentaTestDataBuilder {
     private Long id;
     private String nombre;
     private LocalDate fechaIngreso;
-    private LocalDate fechaVenta;
     private Double valorBase;
     private LocalDate fechaGerminacion;
     private LocalDate fechaPlantula;
@@ -19,7 +18,6 @@ public class VentaTestDataBuilder {
     public VentaTestDataBuilder() {
         id = 1L;
         nombre = "1234";
-        fechaVenta = LocalDate.now();
         fechaIngreso = LocalDate.now();
         fechaGerminacion = LocalDate.now();
         fechaPlantula = LocalDate.now();
@@ -38,10 +36,6 @@ public class VentaTestDataBuilder {
         return this;
     }
 
-    public VentaTestDataBuilder conFechaVenta(LocalDate fechaVenta) {
-        this.fechaVenta = fechaVenta;
-        return this;
-    }
 
     public VentaTestDataBuilder conFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
@@ -61,6 +55,16 @@ public class VentaTestDataBuilder {
 
     public VentaTestDataBuilder conFechaReproduccion(LocalDate fechaReproduccion) {
         this.fechaReproduccion = fechaReproduccion;
+        return this;
+    }
+
+    public VentaTestDataBuilder conFechaPlantula(LocalDate fechaPlantula) {
+        this.fechaPlantula = fechaPlantula;
+        return this;
+    }
+
+    public VentaTestDataBuilder conValorBase(double valorBase) {
+        this.valorBase = valorBase;
         return this;
     }
 
