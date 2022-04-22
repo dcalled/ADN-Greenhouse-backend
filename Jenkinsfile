@@ -1,5 +1,6 @@
+@Library('ceiba-jenkins-library') _
 pipeline {
-  agent any
+  agent 'Slave_Induccion'
 
   tools {
     jdk 'JDK8_Centos' //Verisión preinstalada en la Configuración del Master
@@ -10,9 +11,7 @@ pipeline {
     stage('Checkout') {
       steps{
         echo "------------>Checkout<------------"
-        sh 'ls'
-        sh 'pwd'
-        sh 'pwd'
+          checkout scm
       }
     }
     
@@ -30,9 +29,12 @@ pipeline {
     stage('Static Code Analysis') {
       steps{
         echo '------------>Análisis de código estático<------------'
-        withSonarQubeEnv('Sonar') {
-sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
-        }
+        //withSonarQubeEnv('Sonar') {
+          //sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+        //}
+        sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:ceiba.greenhouse.david.calle',
+          sonarName:'Ceiba-Greenhouse(david.calle)',
+          sonarPathProperties:'./sonar-project.properties')
       }
     }
 
