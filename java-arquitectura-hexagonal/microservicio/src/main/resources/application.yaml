@@ -12,9 +12,9 @@ server:
 
 spring:
    datasource:
-      driver-class-name: com.mysql.cj.jdbc.Driver
+      driver-class-name: org.mariadb.jdbc.Driver
       type: com.zaxxer.hikari.HikariDataSource
-      jdbcUrl: jdbc:mysql://172.18.0.3:3306/greenhouseDB
+      jdbcUrl: jdbc:mysql://172.21.0.3:3306/greenhouseDB
       username: root
       password: ENC(LOetHx9IAvuZScoQBQuYLQO/F0XzvpVM)
       hikari:

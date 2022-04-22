@@ -20,10 +20,10 @@ pipeline {
       steps{
         echo "------------>Compile & Unit Tests<------------"
         
-        sh 'cd java-arquitectura-hexagonal/microservicio' 
-        sh 'chmod +x gradlew'
-        sh './gradlew --b ./build.gradle test'
-        
+        dir('java-arquitectura-hexagonal/microservicio' ) {
+            sh 'chmod +x gradlew'
+            sh './gradlew --b ./build.gradle test'
+        }
       }
     }
 

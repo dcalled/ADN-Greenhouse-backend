@@ -11,8 +11,5 @@
         <module name="inventario.dominio.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="inventario.infraestructura.test" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
