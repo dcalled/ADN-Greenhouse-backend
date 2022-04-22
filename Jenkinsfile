@@ -1,6 +1,6 @@
 @Library('ceiba-jenkins-library') _
 pipeline {
-  agent 'Slave_Induccion'
+  agent any
 
   tools {
     jdk 'JDK8_Centos' //Verisión preinstalada en la Configuración del Master
