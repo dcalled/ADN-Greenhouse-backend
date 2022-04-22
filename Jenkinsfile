@@ -1,3 +1,4 @@
+@Library('ceiba-jenkins-library') _
 pipeline {
   agent any
 
@@ -10,9 +11,7 @@ pipeline {
     stage('Checkout') {
       steps{
         echo "------------>Checkout<------------"
-        sh 'ls'
-        sh 'pwd'
-        sh 'pwd'
+          checkout scm
       }
     }
     
@@ -31,8 +30,11 @@ pipeline {
       steps{
         echo '------------>Análisis de código estático<------------'
         withSonarQubeEnv('Sonar') {
-sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+          sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
         }
+        sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:greenhouse.david.calle',
+          sonarName:'CeibaADN-Greenhouse(david.calle)',
+          sonarPathProperties:'./sonar-project.properties')
       }
     }
 
